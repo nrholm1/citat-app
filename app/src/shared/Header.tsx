@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 
 function Header() {
     const element = (
@@ -10,6 +10,11 @@ function Header() {
                     <Nav.Link href="/">Quote List</Nav.Link>
                     <Nav.Link href="/quote/random">Random Quote</Nav.Link>
                 </Nav>
+                <Form inline>
+                    <FormControl type="text" placeholder="Search quote" className="mr-sm-2" />
+                    <Button variant="outline-success">Search</Button>
+                    <Nav.Link href="/login" style={{fontSize: 24}}>Log in</Nav.Link>
+                </Form>
             </Navbar>
         </div>
     );

@@ -12,13 +12,20 @@ enum VoteState {
 }
 
 function QuoteCard(props: any) {
+    console.log("bruh");
     let data: Quote = props.data;
     const path = useLocation();
+    const [currentId, setCurrentId] = useState<number>(-1);
 
     if (data == undefined) {
         let _id = path.pathname.split('/')[2];
         if (_id === "random")
-            data = QuoteService.getRandom();
+            if (currentId === -1) {
+                data = QuoteService.getRandom();
+                setCurrentId(data.id)
+            }
+            else
+                data = QuoteService.getById(currentId);    
         else
             data = QuoteService.getById(parseInt(_id));
     }
@@ -72,14 +79,14 @@ function QuoteCard(props: any) {
             <table className={"vote-btn"}>
                 <thead>
                     <th>
-                        <Button active={voted === VoteState.DOWN} 
+                        <Button active={voted === VoteState.UP} 
                                 onClick={() => upvote()} 
                                 variant="success">↑</Button>
                     </th>
                 </thead>
                 <tbody>
                     <tr>
-                        <Button active={voted === VoteState.UP} 
+                        <Button active={voted === VoteState.DOWN} 
                                 onClick={() => downvote()} 
                                 variant="danger">↓</Button>
                     </tr>

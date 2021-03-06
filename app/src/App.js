@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Header from '../src/shared/Header';
 import QuoteCard from './components/quote/quote-card';
 import QuoteList from './components/quote-list';
+import LoginUser from './components/login-user';
 
 function App() {
   return (
@@ -15,10 +16,11 @@ function App() {
         <Header />
         <div className="container" style={{marginTop: "25px"}}>
           <Switch>
-            {/* TODO should maybe be loaded inside component through service - will save headache here as wel */}
             <Route exact path="/" component={QuoteList} />
             <Route exact path="/quote/random" component={QuoteCard} />
             <Route exact path="/quote/:id" component={QuoteCard} />
+            <Route exact path="/search" component={QuoteList} />
+            <Route exact path="/login" component={LoginUser} />
           </Switch>
         </div>
       </div>
