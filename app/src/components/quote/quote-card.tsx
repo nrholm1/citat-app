@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { Table, Button } from 'react-bootstrap';
-import { quotelist } from '../../mockdata';
 import Quote from '../../models/quote';
 import './quote-card.css';
-import QuoteService from '../../services/quote-service'
+import QuoteService from '../../services/quote-service';
+import { useLocation } from 'react-router-dom'
 
 enum VoteState {
-    NO, UP, DOWN 
+    NO, 
+    UP, 
+    DOWN 
 }
 
 function QuoteCard(props: any) {
-    const data: Quote = props.data;
+    let data: Quote = props.data;
+    const path = useLocation();
+
+    if (data == undefined) {
+        let _id = path.pathname.split('/')[2];
+        if (_id === "random")
+            data = QuoteService.getRandom();
+        else
+            data = QuoteService.getById(parseInt(_id));
+    }
+
     const [karma, setKarma] = useState<number>(data.karma);
     const [voted, setVoted] = useState<VoteState>(VoteState.NO)
 
@@ -39,6 +51,7 @@ function QuoteCard(props: any) {
             setVoted(VoteState.DOWN);
         }
         else if (voted === VoteState.UP) {
+            // lazy method: downvote twice to cancel out old upvote
             QuoteService.downvote(data.id);
             QuoteService.downvote(data.id);
             setVoted(VoteState.DOWN);
@@ -57,12 +70,20 @@ function QuoteCard(props: any) {
                 {karma}
             </div>
             <table className={"vote-btn"}>
-                <th>
-                    <Button onClick={() => upvote()} variant="success">↑</Button>
-                </th>
-                <tr>
-                    <Button onClick={() => downvote()} variant="danger">↓</Button>
-                </tr>
+                <thead>
+                    <th>
+                        <Button active={voted === VoteState.DOWN} 
+                                onClick={() => upvote()} 
+                                variant="success">↑</Button>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <Button active={voted === VoteState.UP} 
+                                onClick={() => downvote()} 
+                                variant="danger">↓</Button>
+                    </tr>
+                </tbody>
             </table>
             <Table striped bordered hover>
                 <thead>
@@ -74,10 +95,10 @@ function QuoteCard(props: any) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <td style={{maxWidth: "50px"}}>
                             { data.name }
                         </td>
-                        <td style={{textAlign: "left"}}>
+                        <td style={{textAlign: "left", maxWidth: "300px" }}>
                             { data.text }
                         </td>
                         <td>

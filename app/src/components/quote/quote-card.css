@@ -3,9 +3,6 @@ table {
     border-radius: 6px;
     border: solid #222 1px;
     padding: 7px;
-
-    min-width: 600px;
-    max-width: 600px;
 }
 
 td {
@@ -23,5 +20,5 @@ td {
 .karma {
     transform: translateY(30%);
     font-weight: bold;
-    min-width: 30px;
+    min-width: 45px;
 }
