@@ -3,6 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import { quotelist } from '../../mockdata';
 import Quote from '../../models/quote';
 import './quote-card.css';
+import QuoteService from '../../services/quote-service'
 
 enum VoteState {
     NO, UP, DOWN 
@@ -15,15 +16,18 @@ function QuoteCard(props: any) {
 
     const upvote = () => {
         if (voted === VoteState.NO) {
-            quotelist[data.id].karma++; // update mock data
+            QuoteService.upvote(data.id);
             setVoted(VoteState.UP);
         }
         else if (voted === VoteState.DOWN) {
-            quotelist[data.id].karma += 2; // update mock data
+            // lazy method: upvote twice to cancel out old downvote
+            QuoteService.upvote(data.id);
+            QuoteService.upvote(data.id);
             setVoted(VoteState.UP);
         }
         else if (voted === VoteState.UP) {
-            quotelist[data.id].karma--; // update mock data
+            // lazy method: downvote to cancel out old upvote
+            QuoteService.downvote(data.id);
             setVoted(VoteState.NO);
         }
         setKarma(data.karma);
@@ -31,15 +35,17 @@ function QuoteCard(props: any) {
 
     const downvote = () => {
         if (voted === VoteState.NO) {
-            quotelist[data.id].karma--; // update mock data
+            QuoteService.downvote(data.id);
             setVoted(VoteState.DOWN);
         }
         else if (voted === VoteState.UP) {
-            quotelist[data.id].karma -= 2; // update mock data
+            QuoteService.downvote(data.id);
+            QuoteService.downvote(data.id);
             setVoted(VoteState.DOWN);
         }
         else if (voted === VoteState.DOWN) {
-            quotelist[data.id].karma++; // update mock data
+            // lazy method: downvote to cancel out old upvote
+            QuoteService.upvote(data.id);
             setVoted(VoteState.NO);
         }
         setKarma(data.karma);

@@ -11,13 +11,15 @@ import QuoteList from './components/quote-list';
 function App() {
   return (
     <Router>
-      <div style={{textAlign: "center"}}>
+      <div>
         <Header />
-        <Switch>
-          {/* TODO should maybe be loaded inside component through service - will save headache here as wel */}
-          <Route exact path="/" component={QuoteList} />
-          <Route exact path="/quote/:id" component={QuoteCard} />
-        </Switch>
+        <div className="container" style={{marginTop: "25px"}}>
+          <Switch>
+            {/* TODO should maybe be loaded inside component through service - will save headache here as wel */}
+            <Route exact path="/" component={QuoteList} />
+            <Route exact path="/quote/:id" component={QuoteCard} />
+          </Switch>
+        </div>
       </div>
     </Router>
   );
