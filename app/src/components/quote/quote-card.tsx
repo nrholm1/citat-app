@@ -3,7 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import Quote from '../../models/quote';
 import './quote-card.css';
 import QuoteService from '../../services/quote-service';
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 enum VoteState {
     NO, 
@@ -96,7 +96,9 @@ function QuoteCard(props: any) {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Quote</th>
+                        <th>
+                            <Link to={`/quote/${data.id}`}>Quote {data.id}</Link>
+                        </th>
                         <th>Date</th>
                     </tr>
                 </thead>
