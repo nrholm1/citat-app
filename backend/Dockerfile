@@ -9,4 +9,4 @@ FROM alpine
 RUN apk add --no-cache ca-certificates && update-ca-certificates
 COPY --from=builder /go/src/nrholm1/citat-backend/ /usr/bin/nrholm1
 EXPOSE 8080 8080
-ENTRYPOINT ["bash", /usr/bin/nrholm1"]
+ENTRYPOINT ["bash", /usr/bin/nrholm1]
