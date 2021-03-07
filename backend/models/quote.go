@@ -9,13 +9,13 @@ import (
 type Quote struct {
 	ID    int       `json: "id"`
 	Name  string    `json: "name"`
-	Text  string    `json: "text"`
-	Date  time.Time `json: "date"`
+	Text  string    `json: "quote_text"`
+	Date  time.Time `json: "date_added"`
 	Karma int       `json: "karma"`
 }
 
 type QuoteList struct {
-	Quotes []Quote `json: "quotes"`
+	Quotes []Quote `json: "Quotes"`
 }
 
 func (q *Quote) Bind(r *http.Request) error {

@@ -7,6 +7,6 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o build/citat-backe
 
 FROM alpine
 RUN apk add --no-cache ca-certificates && update-ca-certificates
-COPY --from=builder /go/src/nrholm1/citat-backend/ /usr/bin/nrholm1
+COPY --from=builder /go/src/nrholm1/citat-backend/ /usr/local/nrholm1
 EXPOSE 8080 8080
-ENTRYPOINT ["bash", /usr/bin/nrholm1]
+ENTRYPOINT [/usr/local/nrholm1]
