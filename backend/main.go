@@ -12,6 +12,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -20,6 +22,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error occured: %s", err.Error())
 	}
+
+	godotenv.Load(".env")
+
 	dbUser, dbPassword, dbName :=
 		os.Getenv("POSTGRES_USER"),
 		os.Getenv("POSTGRES_PASSWORD"),
