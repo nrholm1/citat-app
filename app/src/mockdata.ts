@@ -1,93 +1,93 @@
 import Quote from "./models/quote";
 
 export const quotelist: Quote[] = [{
-    id: 0,
-    name: "Niels Raunkjær Holm",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: 0
+    ID: 0,
+    Name: "Niels Raunkjær Holm",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: 0
 }, 
 {
-    id: 1,
-    name: "Mr Niles",
-    text: "Lad mig lige drop kicke den der snus... 💩 bruh my name is jeff and actually i am a pretty solid guy i just need some time i swear to freaking bruv",
-    date: "8/8/2019",
-    karma: -2
+    ID: 1,
+    Name: "Mr Niles",
+    Text: "Lad mig lige drop kicke den der snus... 💩 bruh my Name is jeff and actually i am a pretty solid guy i just need some time i swear to freaking bruv",
+    Date: "8/8/2019",
+    Karma: -2
 },
 {
-    id: 2,
-    name: "Store fede",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: 100
+    ID: 2,
+    Name: "Store fede",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: 100
 },
 {
-    id: 3,
-    name: "Ulrik",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: 69
+    ID: 3,
+    Name: "Ulrik",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: 69
 },
 {
-    id: 4,
-    name: "Magn",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: 420
+    ID: 4,
+    Name: "Magn",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: 420
 },
 {
-    id: 5,
-    name: "Kusken",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: 1337
+    ID: 5,
+    Name: "Kusken",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: 1337
 },
 {
-    id: 6,
-    name: "Putin",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: -12
+    ID: 6,
+    Name: "Putin",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: -12
 },
 {
-    id: 7,
-    name: "Dum og grim",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: 2
+    ID: 7,
+    Name: "Dum og grim",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: 2
 },
 {
-    id: 8,
-    name: "Bambam Stenhård",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: 234
+    ID: 8,
+    Name: "Bambam Stenhård",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: 234
 },
 {
-    id: 9,
-    name: "Store fede",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: -144
+    ID: 9,
+    Name: "Store fede",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: -144
 },
 {
-    id: 10,
-    name: "Kaptajn Kævle 🏴‍☠️",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: 750
+    ID: 10,
+    Name: "Kaptajn Kævle 🏴‍☠️",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: 750
 },
 {
-    id: 11,
-    name: "Biggie",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: -1417
+    ID: 11,
+    Name: "Biggie",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: -1417
 },
 {
-    id: 12,
-    name: "Karl",
-    text: "Lad mig lige drop kicke den der snus... 💩",
-    date: "8/8/2019",
-    karma: 2122
+    ID: 12,
+    Name: "Karl",
+    Text: "Lad mig lige drop kicke den der snus... 💩",
+    Date: "8/8/2019",
+    Karma: 2122
 }];

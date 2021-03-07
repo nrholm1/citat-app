@@ -25,6 +25,12 @@ func quotes(router chi.Router) {
 	})
 }
 
+func setupResponse(w *http.ResponseWriter, req *http.Request) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+}
+
 func QuoteContext(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		quoteID := chi.URLParam(r, "quoteId")
@@ -42,6 +48,7 @@ func QuoteContext(next http.Handler) http.Handler {
 }
 
 func createQuote(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
 	Quote := &models.Quote{}
 	if err := render.Bind(r, Quote); err != nil {
 		render.Render(w, r, ErrBadRequest)
@@ -58,6 +65,7 @@ func createQuote(w http.ResponseWriter, r *http.Request) {
 }
 
 func getAllQuotes(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
 	Quotes, err := dbInstance.GetAllQuotes()
 	if err != nil {
 		render.Render(w, r, ServerErrorRenderer(err))
@@ -69,6 +77,7 @@ func getAllQuotes(w http.ResponseWriter, r *http.Request) {
 }
 
 func getQuote(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
 	QuoteID := r.Context().Value(quoteIDKey).(int)
 	Quote, err := dbInstance.GetQuoteById(QuoteID)
 	if err != nil {
@@ -86,6 +95,7 @@ func getQuote(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteQuote(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
 	QuoteId := r.Context().Value(quoteIDKey).(int)
 	err := dbInstance.DeleteQuote(QuoteId)
 	if err != nil {
@@ -98,6 +108,7 @@ func deleteQuote(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func updateQuote(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
 	QuoteId := r.Context().Value(quoteIDKey).(int)
 	QuoteData := models.Quote{}
 	if err := render.Bind(r, &QuoteData); err != nil {

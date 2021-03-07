@@ -1,4 +1,4 @@
-FROM golang:1.14.6-alpine3.12 as builder
+FROM golang:1.16-alpine3.13 as builder
 COPY go.mod go.sum /go/src/nrholm1/citat-backend/
 WORKDIR /go/src/nrholm1/citat-backend/
 RUN go mod download
@@ -7,6 +7,8 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o build/citat-backe
 
 FROM alpine
 RUN apk add --no-cache ca-certificates && update-ca-certificates
-COPY --from=builder /go/src/nrholm1/citat-backend/ /usr/local/nrholm1
+COPY --from=builder /go/src/nrholm1/citat-backend/ /usr/local/bin/nrholm1
 EXPOSE 8080 8080
-ENTRYPOINT [/usr/local/nrholm1]
+ENTRYPOINT ["/usr/bin/nrholm1"]
+
+# Dockerfile not working - seems like the issues are with filesystem...

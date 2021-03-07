@@ -6,7 +6,7 @@ import QuoteCard from './quote/quote-card';
 const createList = (quotes: Quote[]) => {
     let list = quotes.map(q => {
         return (
-        <li key={q.id}>
+        <li key={q.ID}>
             <QuoteCard data={q} />
         </li>
         )

@@ -1,9 +1,9 @@
 interface Quote {
-    id: number;
-    name: string;
-    text: string;
-    date: string;
-    karma: number;
+    ID: number;
+    Name: string;
+    Text: string;
+    Date: string;
+    Karma: number;
 }
 
 
