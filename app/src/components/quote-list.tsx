@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { quotelist } from '../mockdata';
 import Quote from '../models/quote';
+import QuoteService from '../services/quote-service';
 import QuoteCard from './quote/quote-card';
 
 const createList = (quotes: Quote[]) => {
@@ -16,12 +17,26 @@ const createList = (quotes: Quote[]) => {
 }
 
 function QuoteList() {
-    const quotes: Quote[] = quotelist;
+    // const quotes: Quote[] = quotelist;
+    const [quotes, setQuotes] = useState<Quote[]>([]);
+    const [loaded, setLoaded] = useState<boolean>(false);
+
+    const getQuotes = async () => {
+        let _quotes = (await QuoteService.getAll()).data.Quotes;
+        setQuotes(_quotes);
+    }
+
+    useEffect(() => {
+        if (!loaded) {
+            getQuotes();
+            setLoaded(true);
+        }
+    }, [loaded, quotes])
     
     return (
         <div style={{textAlign: "center"}}>
             {
-               createList(quotes)
+                !loaded ? <h3>Loading...</h3>  : createList(quotes)
             }
         </div>
     )

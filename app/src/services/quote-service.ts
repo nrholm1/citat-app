@@ -1,6 +1,7 @@
 import { quotelist } from "../mockdata";
 import Quote from "../models/quote";
 import axios, { AxiosResponse } from 'axios';
+import QuoteArrayDTO from "../models/quoteArrayDto";
 
 const apiURL = "http://localhost:8080/quotes"
 
@@ -9,8 +10,8 @@ const QuoteService = {
         console.log("sending req to id: " + id)
         return axios.get<Quote>(`${apiURL}/${id}`);
     },
-    getAll(id: number): Quote {
-        return quotelist[id];
+    getAll(): Promise<AxiosResponse<QuoteArrayDTO>> {
+        return axios.get<QuoteArrayDTO>(apiURL);
     },
     getRandom(): Promise<AxiosResponse<Quote>> {
         let randomId = Math.floor(Math.random() * quotelist.length);
