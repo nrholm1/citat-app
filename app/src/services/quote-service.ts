@@ -14,8 +14,7 @@ const QuoteService = {
         return axios.get<QuoteArrayDTO>(apiURL);
     },
     getRandom(): Promise<AxiosResponse<Quote>> {
-        let randomId = Math.floor(Math.random() * quotelist.length);
-        return axios.get<Quote>(`${apiURL}/${randomId}`);
+        return axios.get<Quote>(`${apiURL}/random`);
     },
     upvote(id: number): void {
         // check if post is in user voted list

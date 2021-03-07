@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { quotelist } from '../mockdata';
 import Quote from '../models/quote';
 import QuoteService from '../services/quote-service';
 import QuoteCard from './quote/quote-card';
