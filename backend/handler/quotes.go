@@ -16,6 +16,7 @@ var quoteIDKey = "quoteID"
 
 func quotes(router chi.Router) {
 	router.Get("/", getAllQuotes)
+	router.Get("/random", getRandomQuote)
 	router.Post("/", createQuote)
 	router.Route("/{quoteId}", func(router chi.Router) {
 		router.Use(QuoteContext)
@@ -80,6 +81,23 @@ func getQuote(w http.ResponseWriter, r *http.Request) {
 	setupResponse(&w, r)
 	QuoteID := r.Context().Value(quoteIDKey).(int)
 	Quote, err := dbInstance.GetQuoteById(QuoteID)
+	if err != nil {
+		if err == db.ErrNoMatch {
+			render.Render(w, r, ErrNotFound)
+		} else {
+			render.Render(w, r, ErrorRenderer(err))
+		}
+		return
+	}
+	if err := render.Render(w, r, &Quote); err != nil {
+		render.Render(w, r, ServerErrorRenderer(err))
+		return
+	}
+}
+
+func getRandomQuote(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
+	Quote, err := dbInstance.GetRandomQuote()
 	if err != nil {
 		if err == db.ErrNoMatch {
 			render.Render(w, r, ErrNotFound)

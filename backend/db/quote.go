@@ -68,3 +68,15 @@ func (db Database) UpdateQuote(QuoteId int, QuoteData models.Quote) (models.Quot
 	}
 	return Quote, nil
 }
+
+func (db Database) GetRandomQuote() (models.Quote, error) {
+	Quote := models.Quote{}
+	query := "SELECT * FROM quotes OFFSET floor(random() * (SELECT COUNT(*) FROM quotes)) LIMIT 1;"
+	row := db.Conn.QueryRow(query)
+	switch err := row.Scan(&Quote.ID, &Quote.Name, &Quote.Text, &Quote.Date, &Quote.Karma); err {
+	case sql.ErrNoRows:
+		return Quote, ErrNoMatch
+	default:
+		return Quote, err
+	}
+}
