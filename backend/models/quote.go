@@ -9,8 +9,8 @@ import (
 type Quote struct {
 	ID    int       `json: "id"`
 	Name  string    `json: "name"`
-	Text  string    `json: "quote_text"`
-	Date  time.Time `json: "date_added"`
+	Text  string    `json: "text"`
+	Date  time.Time `json: "date"`
 	Karma int       `json: "karma"`
 }
 

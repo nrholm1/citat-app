@@ -25,8 +25,8 @@ func (db Database) GetAllQuotes() (*models.QuoteList, error) {
 func (db Database) AddQuote(quote *models.Quote) error {
 	var id int
 	var date string
-	query := `INSERT INTO quotes (name, quote_text) VALUES ($1, $2) RETURNING id, date`
-	err := db.Conn.QueryRow(query, quote.Name, quote.Text, quote.Karma).Scan(&id, &date)
+	query := `INSERT INTO quotes (name, text) VALUES ($1, $2) RETURNING id, date`
+	err := db.Conn.QueryRow(query, quote.Name, quote.Text).Scan(&id, &date)
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func (db Database) DeleteQuote(QuoteId int) error {
 }
 func (db Database) UpdateQuote(QuoteId int, QuoteData models.Quote) (models.Quote, error) {
 	Quote := models.Quote{}
-	query := `UPDATE quotes SET name=$1, description=$2 WHERE id=$3 RETURNING id, name, description, created_at;`
+	query := `UPDATE quotes SET name=$1, description=$2 WHERE id=$3 RETURNING id, name, quote, date;`
 	err := db.Conn.QueryRow(query, QuoteData.Name, QuoteData.Text, QuoteId).Scan(&Quote.ID, &Quote.Name, &Quote.Text, &Quote.Date, &Quote.Karma)
 	if err != nil {
 		if err == sql.ErrNoRows {
