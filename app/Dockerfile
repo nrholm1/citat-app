@@ -1,11 +1,20 @@
-FROM node:12-alpine
+FROM node 
+#:13.12.0-alpine
+
 WORKDIR /app
 
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY package.json .
+COPY package-lock.json .
+COPY yarn.lock .
+RUN npm install
+RUN yarn install
+RUN npm install react-scripts -g
+RUN npm install typescript
 
 # add app
-COPY . ./
+COPY . .
 
 EXPOSE 3000 3000
 
