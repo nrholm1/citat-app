@@ -10,13 +10,6 @@ td {
     padding: 0 10px 5px 10px;
 }
 
-.vote-btn {
-    min-width: 60px;
-    max-width: 60px;
-    border: none;
-    margin: 10px 10px 0 0;
-}
-
 .karma {
     transform: translateY(30%);
     font-weight: bold;

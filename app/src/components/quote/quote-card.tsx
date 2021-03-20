@@ -101,22 +101,6 @@ function QuoteCard(props: any) {
             <div className={"karma"}>
                 {data.Karma}
             </div>
-            <table className={"vote-btn"}>
-                <thead>
-                    <th>
-                        <Button active={voted === VoteState.UP} 
-                                onClick={() => upvote()} 
-                                variant="success">↑</Button>
-                    </th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <Button active={voted === VoteState.DOWN} 
-                                onClick={() => downvote()} 
-                                variant="danger">↓</Button>
-                    </tr>
-                </tbody>
-            </table>
             <Table striped bordered hover>
                 <thead>
                     <tr>
