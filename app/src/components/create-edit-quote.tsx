@@ -40,9 +40,6 @@ function CreateEditQuote() {
                         onChange={e => setQuoteText(e.target.value)}
                         type="text" 
                         placeholder="Enter Quote" />
-                    <Form.Text className="text-muted">
-                    En endnu sjovere historie...
-                    </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formEmail">
                     <Form.Label>Email address</Form.Label>
@@ -53,10 +50,7 @@ function CreateEditQuote() {
                     <Form.Text className="text-muted">
                     Your email is not visible to anyone.
                     </Form.Text>
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="I am not a robot. (KID does not count)" />
-                </Form.Group>
+                </Form.Group> 
                 <Button 
                     variant="primary" 
                     type="submit"

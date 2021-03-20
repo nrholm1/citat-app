@@ -132,7 +132,7 @@ function QuoteCard(props: any) {
                         <td style={{maxWidth: "50px"}}>
                             { data.Name }
                         </td>
-                        <td style={{textAlign: "left", maxWidth: "300px" }}>
+                        <td style={{textAlign: "left", minWidth: "300px", maxWidth: "300px" }}>
                             { data.Text }
                         </td>
                         <td>
