@@ -13,17 +13,10 @@ const tempQuote: Quote = {
     Karma: 69
 } 
 
-enum VoteState {
-    NO, 
-    UP, 
-    DOWN 
-}
-
 function QuoteCard(props: any) {
     console.log("bruh");
     const path = useLocation();
     const [currentId, setCurrentId] = useState<number>(-1);
-    const [voted, setVoted] = useState<VoteState>(VoteState.NO)
     const [data, setData] = useState<Quote>(tempQuote);
 
     const getQuote = async (id: number) => {
@@ -58,48 +51,13 @@ function QuoteCard(props: any) {
             getQuote(parseInt(_id))
     }, [currentId])
 
-    const upvote = () => {
-        if (voted === VoteState.NO) {
-            QuoteService.upvote(data.ID);
-            setVoted(VoteState.UP);
-        }
-        else if (voted === VoteState.DOWN) {
-            // lazy method: upvote twice to cancel out old downvote
-            QuoteService.upvote(data.ID);
-            QuoteService.upvote(data.ID);
-            setVoted(VoteState.UP);
-        }
-        else if (voted === VoteState.UP) {
-            // lazy method: downvote to cancel out old upvote
-            QuoteService.downvote(data.ID);
-            setVoted(VoteState.NO);
-        }
-        // update karma ??
-    }
-
-    const downvote = () => {
-        if (voted === VoteState.NO) {
-            QuoteService.downvote(data.ID);
-            setVoted(VoteState.DOWN);
-        }
-        else if (voted === VoteState.UP) {
-            // lazy method: downvote twice to cancel out old upvote
-            QuoteService.downvote(data.ID);
-            QuoteService.downvote(data.ID);
-            setVoted(VoteState.DOWN);
-        }
-        else if (voted === VoteState.DOWN) {
-            // lazy method: downvote to cancel out old upvote
-            QuoteService.upvote(data.ID);
-            setVoted(VoteState.NO);
-        }
-        // update karma ??
-    }
-
     return (
         <div style={{display: "flex"}}>
+            <div className={"karma-heart"}>
+                ❤
+            </div>
             <div className={"karma"}>
-                {data.Karma}
+              {data.Karma}
             </div>
             <Table striped bordered hover>
                 <thead>
