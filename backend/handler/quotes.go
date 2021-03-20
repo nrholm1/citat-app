@@ -18,7 +18,8 @@ func quotes(router chi.Router) {
 	router.Get("/", getAllQuotes)
 	router.Get("/random", getRandomQuote)
 	router.Post("/", createQuote)
-	router.Route("/{quoteId}", func(router chi.Router) {
+	router.Post("/matchup", updateEloRatings)
+	router.Route("/id={quoteId}", func(router chi.Router) {
 		router.Use(QuoteContext)
 		router.Get("/", getQuote)
 		router.Put("/updateQuote", updateQuote)
@@ -143,6 +144,33 @@ func updateQuote(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err := render.Render(w, r, &Quote); err != nil {
+		render.Render(w, r, ServerErrorRenderer(err))
+		return
+	}
+}
+
+func updateEloRatings(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
+
+	Matchup := &models.Matchup{}
+	if err := render.Bind(r, Matchup); err != nil {
+		render.Render(w, r, ErrBadRequest)
+		return
+	}
+
+	WinnerId := Matchup.WinnerID
+	LoserId := Matchup.LoserID
+
+	QuoteList, err := dbInstance.UpdateEloRatings(WinnerId, LoserId)
+	if err != nil {
+		if err == db.ErrNoMatch {
+			render.Render(w, r, ErrNotFound)
+		} else {
+			render.Render(w, r, ServerErrorRenderer(err))
+		}
+		return
+	}
+	if err := render.Render(w, r, QuoteList); err != nil {
 		render.Render(w, r, ServerErrorRenderer(err))
 		return
 	}

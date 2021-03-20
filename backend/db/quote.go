@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 	"nrholm1/citat-backend/models"
+	"nrholm1/citat-backend/utils"
 	"time"
 )
 
@@ -58,7 +59,7 @@ func (db Database) DeleteQuote(QuoteId int) error {
 }
 func (db Database) UpdateQuote(QuoteId int, QuoteData models.Quote) (models.Quote, error) {
 	Quote := models.Quote{}
-	query := `UPDATE quotes SET name=$1, description=$2 WHERE id=$3 RETURNING id, name, quote, date;`
+	query := `UPDATE quotes SET name=$1, text=$2 WHERE id=$3 RETURNING id, name, text, date, karma;`
 	err := db.Conn.QueryRow(query, QuoteData.Name, QuoteData.Text, QuoteId).Scan(&Quote.ID, &Quote.Name, &Quote.Text, &Quote.Date, &Quote.Karma)
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -67,6 +68,42 @@ func (db Database) UpdateQuote(QuoteId int, QuoteData models.Quote) (models.Quot
 		return Quote, err
 	}
 	return Quote, nil
+}
+
+func (db Database) UpdateEloRatings(WinnerId int, LoserId int) (*models.QuoteList, error) {
+	QuoteList := &models.QuoteList{}
+	winner, err1 := db.GetQuoteById(WinnerId)
+	if err1 != nil {
+		return QuoteList, err1
+	}
+	loser, err2 := db.GetQuoteById(LoserId)
+	if err2 != nil {
+		return QuoteList, err2
+	}
+
+	winnerRating, loserRating := utils.CalculateOutcome(winner, loser)
+
+	query1 := `UPDATE quotes SET karma=$1 WHERE id=$2 RETURNING id, name, text, date, karma;`
+	err3 := db.Conn.QueryRow(query1, winnerRating, winner.ID).Scan(&winner.ID, &winner.Name, &winner.Text, &winner.Date, &winner.Karma)
+	if err3 != nil {
+		if err3 == sql.ErrNoRows {
+			return QuoteList, ErrNoMatch
+		}
+		return QuoteList, err3
+	}
+
+	query2 := `UPDATE quotes SET karma=$1 WHERE id=$2 RETURNING id, name, text, date, karma;`
+	err4 := db.Conn.QueryRow(query2, loserRating, loser.ID).Scan(&loser.ID, &loser.Name, &loser.Text, &loser.Date, &loser.Karma)
+	if err4 != nil {
+		if err4 == sql.ErrNoRows {
+			return QuoteList, ErrNoMatch
+		}
+		return QuoteList, err4
+	}
+	QuoteList.Quotes = append(QuoteList.Quotes, winner)
+	QuoteList.Quotes = append(QuoteList.Quotes, loser)
+
+	return QuoteList, nil
 }
 
 func (db Database) GetRandomQuote() (models.Quote, error) {
