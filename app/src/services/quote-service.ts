@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 import QuoteArrayDTO from "../models/quoteArrayDto";
 import QuoteDto from "../models/quoteDto";
 
-const apiURL = "http://localhost:8080/quotes"
+const apiURL = "http://192.168.1.222:8080/quotes"
 
 const QuoteService = {
     create(quoteDto: QuoteDto): Promise<AxiosResponse<Quote>> {
