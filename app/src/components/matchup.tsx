@@ -9,7 +9,7 @@ function MatchupView() {
 
     return (
         <div className={"container"} style={{textAlign: "center"}}>
-            <h1>Standoff! 💎 / 💩</h1>
+            <h1>💎 / 💩</h1>
             <SimpleQuoteCard data={{id: 1}} />
             <h1>vs</h1>
             <SimpleQuoteCard data={{id: 2}} />

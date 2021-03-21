@@ -10,6 +10,10 @@ td {
     padding: 0 10px 5px 10px;
 }
 
+td:hover {
+    cursor: normal;
+}
+
 .karma {
     transform: translateY(30%);
     font-weight: bold;

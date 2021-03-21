@@ -34,8 +34,8 @@ function SimpleQuoteCard(props: any) {
     }, [currentId, data])
 
     return (
-        <div style={{display: "flex"}}>
-                <h3 className={"karma-heart"} onClick={() => setVoted(true)}>
+        <div style={{display: "flex", justifyContent: "center"}}>
+                <h3 className={"karma-heart"}>
                         ❤
                 </h3>
             {
@@ -48,15 +48,17 @@ function SimpleQuoteCard(props: any) {
                         ?
                     </h3>
             }
-            <Table striped bordered hover>
-                <tbody>
-                    <tr>
-                        <td style={{textAlign: "center", minWidth: "100px", maxWidth: "200px" }}>
-                            { data.Text }
-                        </td>
-                    </tr>
-                </tbody>
-            </Table>
+            <div style={{maxWidth: "300px"}}>
+                <Table striped bordered hover>
+                    <tbody>
+                        <tr>
+                            <td style={{textAlign: "center"}} onClick={() => setVoted(true)}>
+                                { data.Text }
+                            </td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </div>
         </div>
     )
 }
