@@ -10,6 +10,7 @@ function Header() {
                     <Nav.Link href="/create-edit">New Quote</Nav.Link>
                     <Nav.Link href="/">Quote List</Nav.Link>
                     <Nav.Link href="/quote/random">Random Quote</Nav.Link>
+                    <Nav.Link href="/matchup">Krid eller kran 🏗</Nav.Link>
                 </Nav>
                 <Form inline>
                     <FormControl type="text" placeholder="Search quote" className="mr-sm-2" />

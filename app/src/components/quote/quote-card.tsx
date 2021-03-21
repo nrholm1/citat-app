@@ -62,7 +62,7 @@ function QuoteCard(props: any) {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Said by</th>
                         <th>
                             <Link to={`/quote/${data.ID}`}>Quote {data.ID}</Link>
                         </th>

@@ -10,6 +10,7 @@ import QuoteCard from './components/quote/quote-card';
 import QuoteList from './components/quote-list';
 import LoginUser from './components/login-user';
 import CreateEditQuote from './components/create-edit-quote';
+import MatchupView from './components/matchup';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route exact path="/login" component={LoginUser} />
             <Route exact path="/create-edit" component={CreateEditQuote} />
             <Route exact path="/create-edit/:id" component={CreateEditQuote} />
+            <Route exact path="/matchup" component={MatchupView} />
           </Switch>
         </div>
       </div>
