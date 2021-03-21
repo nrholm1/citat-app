@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 import QuoteArrayDTO from "../models/quoteArrayDto";
 import QuoteDto from "../models/quoteDto";
 
-const apiURL = "http://192.168.1.222:8080/quotes"
+const apiURL = "http://192.168.1.106:8080/quotes"
 
 const QuoteService = {
     create(quoteDto: QuoteDto): Promise<AxiosResponse<Quote>> {
@@ -19,6 +19,10 @@ const QuoteService = {
     },
     getRandom(): Promise<AxiosResponse<Quote>> {
         return axios.get<Quote>(`${apiURL}/random`);
+    },
+    doMatchup(_winnerId: number, _loserId: number): Promise<AxiosResponse<QuoteArrayDTO>> {
+        let matchupResult = {winnerid: _winnerId, loserid: _loserId};
+        return axios.post<QuoteArrayDTO>(`${apiURL}/matchup`, matchupResult);
     }
 }
 
